@@ -144,6 +144,7 @@ export const MapRegular = React.memo(() => {
             <MapIcon business="acid" />
             <MapIcon business="nightclub" />
             <MapIcon business="importExport" />
+            <MapIcon business="hangar" />
             <MapIcon business="wheel" />
         </React.Fragment>
     );

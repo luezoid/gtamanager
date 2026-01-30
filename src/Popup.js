@@ -84,7 +84,7 @@ export const PopupNewUser = (props) => {
             </div>
             <div className="main desktop-only">
                 <p>The GTA V Business Manager can keep track of your businesses while you play the game and alert you when one needs
-                your attention. It can also remind you when to spin the wheel, and when your daily fees will occur.</p>
+                your attention. It can also remind you when to spin the wheel.</p>
                 <p>To begin, click the cog of a business on the right to set it up. Product and supply bars can be set by dragging
                 the bars to their in game values.</p>
                 <p>Whenever you are in a session where businesses run (such as free roam and contact missions), start the manager
@@ -94,7 +94,7 @@ export const PopupNewUser = (props) => {
             </div>
             <div className="main mobile-only">
                 <p>The GTA V Business Manager can keep track of your businesses while you play the game and alert you when one needs
-                your attention. It can also remind you when to spin the wheel, and when your daily fees will occur.</p>
+                your attention. It can also remind you when to spin the wheel.</p>
                 <p>To begin, tap the cog of a business (below the map) to set it up. Product and supply bars can be set by dragging
                 the bars to their in game values.</p>
                 <p>Whenever you are in a session where businesses run (such as free roam and contact missions), start the manager
@@ -1385,6 +1385,79 @@ export const PopupSetupWheel = connect((state) => {
     );
 });
 
+export const PopupSetupHangar = connect((state) => {
+    let newProps = {
+        hangar: state.userInfo.hangar,
+    }
+    return newProps;
+})((props) => {
+
+    const dispatch = useDispatch();
+
+    let workingInfo = props.hangar;
+    const [state, setState] = useState(workingInfo);
+
+    function toggleOwned(e) {
+        let newValue = !state.owned;
+        setState((previousState) => update(previousState, {
+            owned: {$set: newValue}
+        }));
+    }
+
+    function setLocation(e) {
+        dispatch(configureLocationSetter("hangar"));
+        dispatch(setBanner("BannerSelectLocation"));
+    }
+
+    function resetCooldown(e) {
+        setState((previousState) => update(previousState, {
+            cooldown: {$set: 0}
+        }));
+    }
+
+    function applyChanges(e) {
+        dispatch(setRootObject({ key: "hangar", value: state }));
+        dispatch(popPopup());
+    }
+
+    return (
+        <div id="hangarSetupGUI" className="setupGUI importExport">
+            <div className="heading">
+                <h1>Hangar Setup</h1>
+            </div>
+            <div className="main">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Owned:</td>
+                            <td className="onechoice fsz">
+                                <button onClick={toggleOwned} disabled={state.owned} className="button green" data-value="1">Yes</button>
+                                <button onClick={toggleOwned} disabled={!state.owned} className="button red" data-value="0">No</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Map location:</td>
+                            <td className="fsz">
+                                <button onClick={setLocation} disabled={!state.owned} className="button blue">Set Location</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cooldown:</td>
+                            <td className="fsz">
+                                <button onClick={resetCooldown} disabled={state.cooldown === 0} className="button blue">Reset</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div className="buttons fsz">
+                <button onClick={() => dispatch(popPopup())} className="button red">Cancel</button>
+                <button onClick={applyChanges} className="button red">Apply</button>
+            </div>
+        </div>
+    );
+});
+
 const stringElementMap = {
     PopupPushDenied,
     PopupMultipleTabs,
@@ -1401,6 +1474,7 @@ const stringElementMap = {
     PopupSetupNightclub,
     PopupSetupImportExport,
     PopupSetupWheel,
+    PopupSetupHangar,
 }
 
 function createPopup(arr) {

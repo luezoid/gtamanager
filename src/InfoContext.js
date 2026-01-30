@@ -1,7 +1,7 @@
 import React from 'react';
 
 export let defaultUserInfo = {
-    version: "2.0.2",
+    version: "2.1.0",
     recentWeekly: 0,
     settings: {
         hide_unowned: false,
@@ -160,6 +160,14 @@ export let defaultUserInfo = {
         map_position: {
             x: 53.86,
             y: 82.30,
+        },
+    },
+    hangar: {
+        owned: false,
+        cooldown: 0,
+        map_position: {
+            x: 35.00,
+            y: 85.00
         },
     },
     wheel: {
@@ -538,6 +546,17 @@ export const staticInfo = {
             },
         ],
     },
+    hangar: {
+        fullName: "Air Freight Cargo",
+        shortName: "Hangar",
+        locations: [
+            { name: "LSIA Hangar 1", x: 38.00, y: 86.00 },
+            { name: "LSIA Hangar A17", x: 34.00, y: 86.00 },
+            { name: "Fort Zancudo 3499", x: 19.50, y: 41.00 },
+            { name: "Fort Zancudo 3497", x: 21.00, y: 41.00 },
+            { name: "Fort Zancudo A2", x: 23.00, y: 39.00 }
+        ],
+    },
     wheel: {
         fullName: "Lucky Wheel",
         shortName: "Lucky Wheel",
@@ -685,6 +704,10 @@ export function updateUserInfo(userInfo) {
             equipment: true
         };
         userInfo.version = "2.0.2";
+    }
+    if (userInfo.version == "2.0.2") {
+        userInfo.hangar = Object.assign({}, defaultUserInfo.hangar);
+        userInfo.version = "2.1.0";
     }
     return userInfo;
 }

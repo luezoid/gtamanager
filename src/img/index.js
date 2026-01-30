@@ -20,4 +20,5 @@ export const business_icons = {
     importExport: iconImportExport,
     wheel: iconWheel,
     acid: iconAcid,
+    hangar: iconImportExport,
 }

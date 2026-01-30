@@ -20,6 +20,9 @@ export const slice = createSlice({
         setImportExportCooldown: (state, action) => {
             state.importExport.cooldown = action.payload;
         },
+        setHangarCooldown: (state, action) => {
+            state.hangar.cooldown = action.payload;
+        },
         toggleNotifications: (state) => {
             state.settings.audio.enabled = !state.settings.audio.enabled;
         },
@@ -39,7 +42,7 @@ export const slice = createSlice({
 });
 
 export const {
-    setResourceValue, setWheelTimestamp, setImportExportCooldown,
+    setResourceValue, setWheelTimestamp, setImportExportCooldown, setHangarCooldown,
     toggleNotifications, setRootObject, toggleBusinessMuted, setUserInfo,
     runTick,
 } = slice.actions;

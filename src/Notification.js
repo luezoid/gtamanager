@@ -123,6 +123,19 @@ export function useNotifyBusiness(business) {
             setState(false);
             return;
         }
+
+        if (business === "hangar") {
+            if (businessInfo.cooldown === 0) {
+                // This relies on the standard notification interval to not spam
+                // But similar to Import/Export, it will notify immediately when hitting 0
+                setState(true);
+                playAudioIfNecessary();
+                pushNotifyIfNecessary("hangar", "Rooster Sourcing", "Rooster has finished sourcing goods.");
+                return;
+            }
+            setState(false);
+            return;
+        }
         
         if (!running) {
             setState(false);

@@ -88,6 +88,11 @@ function tick(userInfo) {
             userInfo["importExport"]["cooldown"] = Math.max(userInfo["importExport"]["cooldown"] - deltaSec*1000, 0);
     }
 
+    // Hangar
+    if (userInfo["hangar"] && userInfo["hangar"]["cooldown"] > 0) { 
+        userInfo["hangar"]["cooldown"] = Math.max(userInfo["hangar"]["cooldown"] - deltaSec*1000, 0);
+    }
+
     return userInfo;
 }
 

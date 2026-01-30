@@ -16,6 +16,7 @@ export const slice = createSlice({
             nightclub: 0,
             importExport: 0,
             wheel: 0,
+            hangar: 0,
         },
         updateState: false,
     },

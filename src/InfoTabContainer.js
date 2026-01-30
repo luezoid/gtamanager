@@ -6,7 +6,7 @@ import TabMCBusiness from './TabMCBusiness';
 import TabNightclub from './TabNightclub';
 import TabImportExport from './TabImportExport';
 import TabWheel from './TabWheel';
-import TabFees from './TabFees';
+import TabHangar from './TabHangar';
 import { useWindowDimensions, calculateScrollbarWidth, useWidthDetector } from './Utility';
 
 const business_objects = {
@@ -19,6 +19,7 @@ const business_objects = {
     acid: <TabMCBusiness business="acid" />,
     nightclub: <TabNightclub />,
     importExport: <TabImportExport />,
+    hangar: <TabHangar />,
     wheel: <TabWheel />,
 }
 
@@ -71,7 +72,6 @@ const InfoTabContainer = (props) => {
                         {props[key] && business_objects[key]}
                     </React.Fragment>
                 ))}
-                <TabFees />
             </div>
             {!props.hideUnowned && inactiveDiv}
         </div>
